@@ -4,6 +4,10 @@
 
 
 
+#### 프로젝트 생성
+
+> 프로젝트 및 앱 개발에 필요한 디렉토리와 파일 생성
+
 - 프로젝트 생성
 
   - `django-admin startproject mybookmark`
@@ -66,7 +70,16 @@
     'bookmarkapp.apps.BookmarkappConfig', # 자신의 App 추가
     ```
 
-  
+
+
+
+---
+
+
+
+#### 모델 생성
+
+> 테이블 관련 내용 개발 (models.py, admin.py)
 
 - 테이블 설계
 
@@ -112,7 +125,67 @@
       - 0.0.0.0 = 모든 사용자의 ip 허용 / 8000 = port 번호
       - 127.0.01 = 자신을 뜻하는 ip
     
+    - 테이블 확인 방법
+      - `python manage.py dbshell`  (db.sqlite3 이 있는 디렉토리에서)
+      - `.table`   # 테이블 목록 보기
+      - `PRAGMA table_info(bookmarkapp_bookmark)` # 테이블 정보 확인
     
+    
+
+---
+
+
+
+#### URL conf 생성
+
+> URL 및 뷰 매핑 관계를 정의 (urls.py)
+
+- urls.py
+
+  ```python
+  from bookmarkapp.views import BookmarkLV, BookmarkDV
+  
+  path('bookmark/', BookmarkLV.as_view(), name='index'),
+  path('bookmark/<int:pk>', BookmarkDV.as_view(), name='detail'),
+  ```
+
+
+
+#### View 생성
+
+> 애플리케이션 로직 개발 (views.py)
+
+- ListView와 DetailView를 상속받는 북마크 뷰 생성
+
+  - views.py
+
+    ```python
+    from django.views.generic import ListView, DetailView # 뷰 상속
+    from bookmarkapp.models import Bookmark  # 모델 클래스 import
+    
+    class BookmarkLV(ListView):
+        model = Bookmark
+    
+    class BookmarkDV(DetailView):
+        model = Bookmark
+    ```
+
+
+
+#### Template 생성
+
+> 화면 UI 개발
+
+- Template 생성
+  - App 폴더에 `templates` 폴더 생성
+  - templates 폴더에 `<app이름>`  폴더 생성
+  - app이름 폴더 안에 `bookmark_list.html`  /  `bookmark_detail.html` 생성
+    - django가 app이름 안에 있는 템플릿을 찾기 때문에
+    - html 작성
+
+
+
+
 
 
 
