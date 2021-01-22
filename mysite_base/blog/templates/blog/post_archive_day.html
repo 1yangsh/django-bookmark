@@ -1,16 +1,23 @@
-<h1>Post Archives for {{ day|date:'Y-m-d' }}</h1>
-<ul>
+{% extends "base.html" %} 
+{% block title %}일별 게시물 {{ day|date:'Y-m-d' }}{% endblock %} 
 
-<div>
+{% block content %}
+<div id="content">
+  <h1>일별 등록된 게시물 {{ day|date:'Y-m-d' }}</h1>
   <ul>
-    {% for post in object_list %}
-    <li>
-      {{ post.modify_date|date:"Y-m-d"}}&nbsp;&nbsp;
-      <a href="{{ post.get_absolute_url }}">
-        <strong>{{ post.title }}</strong></a
-      >
-    </li>
 
-    {% endfor %}
-  </ul>
+  <div>
+    <ul>
+      {% for post in object_list %}
+      <li>
+        {{ post.modify_date|date:"Y-m-d"}}&nbsp;&nbsp;
+        <a href="{{ post.get_absolute_url }}">
+          <strong>{{ post.title }}</strong></a
+        >
+      </li>
+
+      {% endfor %}
+    </ul>
+  </div>
 </div>
+{% endblock %}

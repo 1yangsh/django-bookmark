@@ -1,19 +1,26 @@
-<h1>Blog List</h1>
+{% extends "base.html" %}
+{% block title %}Post List {% endblock %}
 
-<!-- display blog list -->
-{% for post in posts %}
-<h2><a href="{{ post.get_absolute_url }}">
-    {{ post.title }}</a></h2>
-    {{ post.modify_date}}
-    <p>{{ post.description }}</p>
-{% endfor %}
+{% block content %}
+<div id="content">
+  <h1>Blog List</h1>
 
-<!-- paging link -->
-<div>
-  {% if page_obj.has_previous %}
-  <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
-  {% endif %} [ page {{ page_obj.number }} / {{page_obj.paginator.num_pages }} ]
-  {% if page_obj.has_next %}
-  <a href="?page={{ page_obj.next_page_number }}">Next</a>
-  {% endif %}
+  <!-- display blog list -->
+  {% for post in posts %}
+  <h2><a href="{{ post.get_absolute_url }}">
+      {{ post.title }}</a></h2>
+      {{ post.modify_date}}
+      <p>{{ post.description }}</p>
+  {% endfor %}
+
+  <!-- paging link -->
+  <div>
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+    {% endif %} [ page {{ page_obj.number }} / {{page_obj.paginator.num_pages }} ]
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
 </div>
+{% endblock %}

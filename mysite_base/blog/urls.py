@@ -5,7 +5,7 @@ app_name = 'blog'
 
 urlpatterns = [
     # /blog/
-    path('', PostLV.as_view(), name='post_list'),
+    path('', PostLV.as_view(), name='index'),
 
     # /blog/post
     path('post/', PostLV.as_view(), name='post_list'),
@@ -28,4 +28,7 @@ urlpatterns = [
 
     # /blog/today/
     path('today/', PostTAV.as_view(), name='post_today_archive'),
+
+    # Search: /search/ -> http://127.0.0.1:8000/blog/search/
+    path('search/', SearchFormView.as_view(), name='search'),
 ]
