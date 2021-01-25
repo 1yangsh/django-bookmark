@@ -3,7 +3,17 @@ from django.urls import path, include
 
 from mysite.views import HomeView
 
+
+# from rest_framework import routers
+# from blog import rest_views
+
+# router = routers.DefaultRouter()
+# router.register(r'users', rest_views.UserViewSet)
+
 urlpatterns = [
+    # path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    
     path('admin/', admin.site.urls),
 
     # http://127.0.01:8000/ -> home page
@@ -11,4 +21,8 @@ urlpatterns = [
 
     path('bookmark/', include('bookmark.urls', namespace='bookmark')),
     path('blog/', include('blog.urls', namespace='blog')),
+
+    
+
+    path('api/', include('api.urls', namespace='api')),
 ]
